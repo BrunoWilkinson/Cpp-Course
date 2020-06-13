@@ -9,3 +9,9 @@ LearnCpp.com is a free website devoted to teaching you how to program in C++. Wh
 Alex conceived, created, and maintains this site. Alex has a bachelors/masters degree in computer science from the University of California, Davis and an MBA degree from WP Carey School of Business at Arizona State University. In the past, he taught 150 students how to program C++ at UC Davis, giving lectures 3 times a week. He worked in the software industry as a programmer (using C++) and development manager for 10 years before making a career shift to software product owner. You can reach him using the contact form below.
 
 LearnCpp.com has been up and running since 2007!
+
+# Recommended by
+
+“I just finished reading through your C++ Tutorial. It’s wonderful. I have taught C++ to college students and have examined many, many intro books on the subject. Your tutorial is the clearest and most comfortable coverage available.”
+- Dr. Robert C.A. Goff, MCSD, MCDBA, MCSE,
+Consulting and Training in Microsoft Technologies
