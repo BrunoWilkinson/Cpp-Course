@@ -36,17 +36,17 @@ public:
 
 Fraction operator*(const Fraction &f1, const Fraction &f2)
 {
-    return { f1.m_numerator * f2.m_numerator, f1.m_denominator * f2.m_denominator };
+    return Fraction(f1.m_numerator * f2.m_numerator, f1.m_denominator * f2.m_denominator);
 }
 
 Fraction operator*(int value, const Fraction &f1)
 {
-    return { f1.m_numerator * value, f1.m_denominator};
+    return Fraction(f1.m_numerator * value, f1.m_denominator);
 }
 
 Fraction operator*(const Fraction &f1, int value)
 {
-    return { f1.m_numerator * value, f1.m_denominator };
+    return Fraction(f1.m_numerator * value, f1.m_denominator);
 }
 
 std::ostream& operator<< (std::ostream &out, const Fraction &fraction)
