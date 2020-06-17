@@ -1,20 +1,101 @@
-// int_array_chap9.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <cassert>
+
+/*
+Write your own integer array class named IntArray from scratch (do not use std::array or std::vector). 
+Users should pass in the size of the array when it is created, and the array should be dynamically allocated. 
+Use assert statements to guard against bad data. Create any constructors or overloaded operators needed to make the following program operate correctly:
+*/
+
+class IntArray
+{
+private:
+	int m_size{ 0 };
+	int* m_data{ nullptr };
+
+public:
+	IntArray(int size) : m_size{ size }
+	{
+		assert(size > 0 && "IntArray length should be a positive integer");
+		m_data = new int[m_size] {};
+	}
+
+	IntArray(const IntArray& source) :
+		m_size{ source.m_size }
+	{
+		m_data = new int[m_size];
+		for (int i{ 0 }; i < source.m_size; i++)
+			m_data[i] = source.m_data[i];
+	}
+
+	~IntArray()
+	{
+		delete[] m_data;
+	}
+
+	IntArray& operator= (const IntArray& source);
+	friend std::ostream& operator<< (std::ostream& out, const IntArray& array);
+	int& operator[] (int index);
+};
+
+IntArray& IntArray::operator= (const IntArray& source)
+{
+	if (this == &source)
+		return *this;
+
+	delete[] m_data;
+
+	m_size = source.m_size;
+
+	m_data = new int[m_size];
+
+	for (int i{ 0 }; i < source.m_size; i++)
+		m_data[i] = source.m_data[i];
+
+	return *this;
+}
+
+std::ostream& operator<< (std::ostream& out, const IntArray& array)
+{
+	for (int i{ 0 }; i < array.m_size; ++i)
+	{
+		out << array.m_data[i] << ' ';
+	}
+	return out;
+}
+
+int& IntArray::operator[] (int index)
+{
+	assert(index >= 0);
+	assert(index < m_size);
+	return m_data[index];
+}
+
+IntArray fillArray()
+{
+	IntArray a(5);
+
+	a[0] = 5;
+	a[1] = 8;
+	a[2] = 2;
+	a[3] = 3;
+	a[4] = 6;
+
+	return a;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	IntArray a{ fillArray() };
+	std::cout << a << '\n';
+
+	auto& ref{ a }; // we're using this reference to avoid compiler self-assignment errors
+	a = ref;
+
+	IntArray b(1);
+	b = a;
+
+	std::cout << b << '\n';
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
